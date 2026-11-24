@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#050608" />
+  <title>GSP ROLEX | Official Esports & Sensitivity Command Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="locked-state">
+
+  <!-- AMBIENT PARTICLE & GRID LAYER -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="aura-orb orb-gold"></div>
+    <div class="aura-orb orb-neon"></div>
+    <div class="scanline-overlay"></div>
+  </div>
+
+  <!-- =========================================================
+       1. AURA-LEVEL CINEMATIC INTRO & DUAL ACCESS GATE
+  ========================================================== -->
+  <section id="gateScreen" class="gate-screen active">
+    <div class="gate-card">
+      <div class="gate-top-tag">
+        <span class="pulse-dot"></span>
+        <span>GSP ROLEX COMMAND NETWORK • v4.0</span>
+      </div>
+
+      <!-- CUSTOM EMBEDDED GSP ROLEX EMBLEM SVG -->
+      <div class="rolex-emblem-wrap">
+        <div class="emblem-ring ring-outer"></div>
+        <div class="emblem-ring ring-inner"></div>
+        <svg class="rolex-crest" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFE082"/>
+              <stop offset="50%" stop-color="#FFB300"/>
+              <stop offset="100%" stop-color="#FF6F00"/>
+            </linearGradient>
+            <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#39FF14"/>
+              <stop offset="100%" stop-color="#00E676"/>
+            </linearGradient>
+            <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+          <!-- Outer Hexagon Shield -->
+          <polygon points="110,10 198,60 198,160 110,210 22,160 22,60"
+                   fill="#0A0D12" stroke="url(#goldGrad)" stroke-width="4" filter="url(#glowFilter)"/>
+          <polygon points="110,22 186,66 186,154 110,198 34,154 34,66"
+                   fill="none" stroke="url(#neonGrad)" stroke-width="1.5" stroke-dasharray="8 4"/>
+          <!-- Crown Icon -->
+          <path d="M72,72 L85,48 L110,66 L135,48 L148,72 Z" fill="url(#goldGrad)" filter="url(#glowFilter)"/>
+          <!-- Center Monogram -->
+          <text x="110" y="116" text-anchor="middle" fill="#FFFFFF" font-family="Orbitron, sans-serif" font-weight="900" font-size="34" letter-spacing="3">GSP</text>
+          <text x="110" y="145" text-anchor="middle" fill="url(#goldGrad)" font-family="Orbitron, sans-serif" font-weight="800" font-size="22" letter-spacing="4">ROLEX</text>
+          <!-- Bottom Crosshair Bar -->
+          <line x1="65" y1="162" x2="155" y2="162" stroke="url(#neonGrad)" stroke-width="2"/>
+          <circle cx="110" cy="162" r="4" fill="#39FF14"/>
+        </svg>
+      </div>
+
+      <h1 class="gate-title">ENTER THE <span class="gold-text">ARENA</span></h1>
+      <p class="gate-subtitle">Pure Skill • Precision Drag • Zero Compromise</p>
+
+      <form id="loginForm" class="gate-form" autocomplete="off">
+        <div class="input-box">
+          <label for="accessKeyInput">ACCESS KEY / PASSCODE</label>
+          <div class="input-field-wrap">
+            <input
+              type="password"
+              id="accessKeyInput"
+              placeholder="Enter Access Key..."
+              required
+            />
+            <button type="button" id="togglePassVis" class="eye-btn" title="Show/Hide Passcode">👁</button>
+          </div>
+        </div>
+
+        <div id="loginFeedback" class="login-feedback" aria-live="polite"></div>
+
+        <button type="submit" id="unlockBtn" class="cyber-btn primary-gold-btn">
+          <span>INITIALIZE SYSTEM</span>
+          <span class="btn-arrow">⚡</span>
+        </button>
+      </form>
+
+      <div class="gate-footer">
+        <span>AUTHENTICATED PORTAL BY <strong>GSP ROLEX</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. MAIN COMMAND PORTAL (UNLOCKED AFTER PASSCODE)
+  ========================================================== -->
+  <div id="portalShell" class="portal-shell hidden">
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="top-navbar">
+      <div class="brand-cluster">
+        <div class="mini-badge">GSP</div>
+        <div class="brand-info">
+          <div class="brand-name">GSP <span class="gold-text">ROLEX</span></div>
+          <div class="brand-status">
+            <span class="status-dot"></span>
+            <span id="roleBadgeText">USER ACCESS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- LIVE AI CHATBOT TRIGGER BUTTON -->
+        <button id="openChatBtn" class="nav-pill-btn neon-pill">
+          <span class="pill-icon">🤖</span>
+          <span>GSP AI BOT</span>
+        </button>
+
+        <!-- ADMIN CONTROL BUTTON (VISIBLE ONLY WHEN LOGGED IN WITH gspsam123) -->
+        <button id="openAdminBtn" class="nav-pill-btn gold-pill hidden">
+          <span class="pill-icon">👑</span>
+          <span>OWNER PANEL</span>
+        </button>
+
+        <!-- LOGOUT / LOCK BUTTON -->
+        <button id="logoutBtn" class="nav-pill-btn danger-pill" title="Lock Portal">
+          <span>🔒</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO AURA BANNER -->
+    <section class="hero-strip">
+      <div class="hero-content">
+        <div class="hero-kicker">OFFICIAL GAMING &amp; SENSITIVITY ARCHITECTURE</div>
+        <h2 class="hero-heading">PRECISION ENGINEERED FOR <span class="neon-text">ONE-TAP DOMINANCE</span></h2>
+        <p class="hero-desc">Select an active module below or consult <strong>GSP AI Assistant</strong> live for instant gameplay &amp; drag optimization.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-box">
+          <span class="stat-num" id="activeModulesCount">0</span>
+          <span class="stat-label">ACTIVE MODULES</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">300+</span>
+          <span class="stat-label">DEVICES READY</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">LIVE</span>
+          <span class="stat-label">GSP AI CORE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. LIVE INLINE GSP AI CHATBOT BAR (TOP COMMAND WIDGET)
+    ========================================================== -->
+    <section id="aiChatDrawer" class="ai-chat-section">
+      <div class="chat-header">
+        <div class="chat-title-group">
+          <span class="ai-avatar">⚡</span>
+          <div>
+            <h3>GSP ROLEX AI ASSISTANT</h3>
+            <span class="ai-sub">Live Sensitivity, Drag Timing &amp; Esports Strategy Bot</span>
+          </div>
+        </div>
+        <button id="collapseChatBtn" class="mini-ghost-btn">Minimize</button>
+      </div>
+
+      <div id="chatMessages" class="chat-messages">
+        <div class="msg bot-msg">
+          <div class="msg-sender">GSP AI</div>
+          <div class="msg-bubble">Yo! Welcome to <strong>GSP ROLEX</strong> Command Portal. Apna phone model, drag issue ya gameplay sawal pucho — seedha exact jawab milega! 🔥</div>
+        </div>
+      </div>
+
+      <form id="chatForm" class="chat-input-bar">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Ask GSP AI anything (e.g. Infinix Hot 40 drag tip, M1887 one-tap)..."
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="sendChatBtn" class="cyber-btn neon-send-btn">SEND ➤</button>
+      </form>
+    </section>
+
+    <!-- =========================================================
+         4. MODULAR SUITE GRID (ALL 8 MODULES CONTROLLED BY ADMIN)
+    ========================================================== -->
+    <main class="workspace-container">
+      <div class="section-bar">
+        <h3 class="section-title">COMMAND MODULES</h3>
+        <span class="section-hint">Click any active module to launch its dedicated workspace</span>
+      </div>
+
+      <!-- DYNAMIC MODULE CARDS RENDERED FROM REGISTRY -->
+      <div id="modulesGrid" class="modules-grid"></div>
+
+      <!-- ACTIVE MODULE WORKSPACE VIEWPORT -->
+      <section id="moduleViewport" class="module-viewport hidden">
+        <div class="viewport-topbar">
+          <div class="viewport-title-wrap">
+            <span id="activeModuleIcon" class="vp-icon">🎯</span>
+            <div>
+              <h3 id="activeModuleTitle">MODULE WORKSPACE</h3>
+              <p id="activeModuleTag">Dedicated Module Engine</p>
+            </div>
+          </div>
+          <button id="closeModuleBtn" class="cyber-btn ghost-btn">✕ BACK TO MODULES</button>
+        </div>
+
+        <!-- SEPARATE MODULE FILE INJECTS ITS UI HERE -->
+        <div id="moduleMountPoint" class="module-mount-point"></div>
+      </section>
+    </main>
+
+    <!-- =========================================================
+         5. OWNER ADMIN CONTROL DRAWER (PASSCODE: gspsam123)
+    ========================================================== -->
+    <aside id="adminDrawer" class="admin-drawer hidden">
+      <div class="admin-panel-box">
+        <div class="admin-header">
+          <div>
+            <span class="owner-chip">👑 OWNER ROOT CONTROL</span>
+            <h3>GSP ROLEX MODULE MANAGER</h3>
+          </div>
+          <button id="closeAdminBtn" class="close-x-btn">✕</button>
+        </div>
+
+        <p class="admin-note">
+          Yahan se kisi bhi module ko <strong>ON / OFF</strong> karo ya uski alag module file ka path/status manage karo. Changes turant save hote hain.
+        </p>
+
+        <!-- MASTER TOGGLES LIST -->
+        <div id="adminModuleToggles" class="admin-toggles-list"></div>
+
+        <!-- AI API KEY OVERRIDE / STATUS -->
+        <div class="admin-api-card">
+          <h4>🤖 GSP AI BOT ENGINE CONFIG</h4>
+          <label for="adminApiKeyInput">Gemini API Key (Pre-loaded &amp; Editable)</label>
+          <div class="api-row">
+            <input type="text" id="adminApiKeyInput" />
+            <button type="button" id="saveApiKeyBtn" class="cyber-btn primary-gold-btn">SAVE KEY</button>
+          </div>
+        </div>
+
+        <div class="admin-actions-footer">
+          <button type="button" id="resetModulesBtn" class="cyber-btn ghost-btn">RESET DEFAULTS</button>
+          <button type="button" id="doneAdminBtn" class="cyber-btn neon-send-btn">APPLY &amp; CLOSE</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- FOOTER -->
+    <footer class="portal-footer">
+      <div><strong>GSP ROLEX</strong> • Official Gaming &amp; Sensitivity Portal</div>
+      <div class="footer-sub">Fair Play • Pure Skill • Modular Architecture</div>
+    </footer>
+  </div>
+
+  <!-- CORE ENGINE SCRIPT -->
+  <script src="app.js"></script>
+</body>
+</html>
